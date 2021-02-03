@@ -5,7 +5,7 @@
 #
 
 # Inherit some common Bliss stuff.
-$(call inherit-product, vendor/bliss/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from pyxis device.
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
@@ -15,7 +15,7 @@ TARGET_FACE_UNLOCK_SUPPORTED := true
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_DEVICE := pyxis
-PRODUCT_NAME := bliss_pyxis
+PRODUCT_NAME := lineage_pyxis
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI 9 Lite
 PRODUCT_MANUFACTURER := Xiaomi
