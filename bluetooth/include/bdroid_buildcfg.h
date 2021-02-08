@@ -47,7 +47,6 @@ static inline const char *BtmGetDefaultName()
     for (unsigned int i = 0; i < ARRAY_SIZE(devices); i++) {
         device_t device = devices[i];
 
-               strcmp(device.product_region, "ALL") == 0)) {
            return device.product_model;
        }
     }
