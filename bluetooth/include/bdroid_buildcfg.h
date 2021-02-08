@@ -48,11 +48,7 @@ static inline const char *BtmGetDefaultName()
         device_t device = devices[i];
 
            return device.product_model;
-       }
-    }
 
-    // Fallback to ro.product.model
-    return "";
 }
 
 #define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
