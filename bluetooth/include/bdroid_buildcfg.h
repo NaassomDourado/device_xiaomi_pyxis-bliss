@@ -43,14 +43,10 @@ static const device_t devices[] = {
 
 static inline const char *BtmGetDefaultName()
 {
-    property_get("ro.product.device", product_device, "");
-    property_get("ro.boot.hwc", product_region, "");
 
     for (unsigned int i = 0; i < ARRAY_SIZE(devices); i++) {
         device_t device = devices[i];
 
-        if (strcmp(device.product_device, product_device) == 0 &&
-               (strcmp(device.product_region, product_region) == 0 ||
                strcmp(device.product_region, "ALL") == 0)) {
            return device.product_model;
        }
