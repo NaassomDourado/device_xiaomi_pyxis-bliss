@@ -1,8 +1,6 @@
 /*
- *
  *  Copyright (c) 2013, The Linux Foundation. All rights reserved.
- *  Not a Contribution, Apache license notifications and license are retained
- *  for attribution purposes only.
+ *  Not a Contribution.
  *
  * Copyright (C) 2012 The Android Open Source Project
  * Copyright (C) 2018-2020 The LineageOS Project
@@ -23,44 +21,54 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#pragma push_macro("PROPERTY_VALUE_MAX")
-
-#include <cutils/properties.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "osi/include/osi.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+int property_get(const char *key, char *value, const char *default_value);
+#ifdef __cplusplus
+}
+#endif
+
 typedef struct {
     const char *product_device;
-    const char *product_region;
     const char *product_model;
 } device_t;
 
 static const device_t devices[] = {
-    {"pyxis", "CN", "MI CC 9"},
-    {"pyxis", "GLOBAL", "Mi 9 Lite"},
+    {"grus", "Xiaomi Mi 9 SE"},
+    {"pyxis", "Xiaomi Mi 9 Lite"},
+    {"sirius", "Xiaomi Mi 8 SE"},
+    {"vela", "Xiaomi Mi CC 9 Meitu Edition"},
 };
 
 static inline const char *BtmGetDefaultName()
 {
+    char product_device[92];
+    property_get("ro.product.device", product_device, "");
 
     for (unsigned int i = 0; i < ARRAY_SIZE(devices); i++) {
         device_t device = devices[i];
 
-           return device.product_model;
+        if (strcmp(device.product_device, product_device) == 0) {
+            return device.product_model;
+        }
+    }
 
+    // Fallback to ro.product.model
+    return "";
 }
 
 #define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
 // Disables read remote device feature
 #define MAX_ACL_CONNECTIONS   16
-#define MAX_L2CAP_CHANNELS    16
+#define MAX_L2CAP_CHANNELS    32
 #define BLE_VND_INCLUDED   TRUE
-// Skips conn update at conn completion
-#define BT_CLEAN_TURN_ON_DISABLED 1
-// Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec
-#define AVDT_NUM_SEPS 12
-
-#pragma pop_macro("PROPERTY_VALUE_MAX")
+#define GATT_MAX_PHY_CHANNEL  10
+#define AVDT_NUM_SEPS 35
 
 #endif
