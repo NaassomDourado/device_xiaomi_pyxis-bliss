@@ -15,5 +15,6 @@ public abstract class IFAAManagerV3 extends IFAAManagerV2 {
     @UnsupportedAppUsage
     public abstract String getExtInfo(int authType, String keyExtInfo);
 
+    @UnsupportedAppUsage
     public abstract void setExtInfo(int authType, String keyExtInfo, String valExtInfo);
 }
