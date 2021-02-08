@@ -43,8 +43,6 @@ static const device_t devices[] = {
 
 static inline const char *BtmGetDefaultName()
 {
-    char product_device[PROPERTY_VALUE_MAX];
-    char product_region[PROPERTY_VALUE_MAX];
     property_get("ro.product.device", product_device, "");
     property_get("ro.boot.hwc", product_region, "");
 
